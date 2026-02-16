@@ -1,19 +1,26 @@
-import time
 
 from selenium import webdriver
+from selenium.common.exceptions import WebDriverException
 
+def browser(browser_name, url):
+    try:
+        if browser_name.lower() == "chrome":
+            driver = webdriver.Chrome()
+        elif browser_name.lower() == "firefox":
+            driver = webdriver.Firefox()
+        elif browser_name.lower() == "edge":
+            driver = webdriver.Edge()
+        else:
+            raise ValueError(f"Unsupported browser: {browser_name}")
 
-def browser(Browser,URL):
-    if Browser == "chrome":
-        web = webdriver.Chrome()
-        web.get(URL)
-    elif Browser == "firefox":
-        web = webdriver.Firefox()
-        web.get(URL)
-    elif Browser == "edge":
-        web = webdriver.Edge()
-        web.get(URL)
-
-
-
-time.sleep(5460)
+        driver.get(url)
+        input("Press Enter to close the browser...")
+    except WebDriverException as e:
+        print(f"WebDriver error: {e}")
+    except Exception as e:
+        print(f"Error: {e}")
+    finally:
+        try:
+            driver.quit()
+        except:
+            pass
