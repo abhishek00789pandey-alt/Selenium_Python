@@ -2,7 +2,18 @@ import time
 
 from selenium import webdriver
 
-web = webdriver.Chrome()
-web.get("https://google.com")
 
-time.sleep(5)
+def browser(Browser,URL):
+    if Browser == "chrome":
+        web = webdriver.Chrome()
+        web.get(URL)
+    elif Browser == "firefox":
+        web = webdriver.Firefox()
+        web.get(URL)
+    elif Browser == "edge":
+        web = webdriver.Edge()
+        web.get(URL)
+
+
+
+time.sleep(5460)
